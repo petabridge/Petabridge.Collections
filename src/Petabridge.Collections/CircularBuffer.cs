@@ -1,4 +1,10 @@
-﻿using System;
+﻿// -----------------------------------------------------------------------
+// <copyright file="CircularBuffer.cs" company="Petabridge, LLC">
+//      Copyright (C) 2015 - 2019 Petabridge, LLC <https://petabridge.com>
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,7 +56,7 @@ namespace Petabridge.Collections
         public int Capacity => Buffer.Length;
 
         // We use an N+1 trick here to make sure we can distinguish full queues from empty ones
-        public int Size => _full ? Capacity : (_tail - _head + Capacity)%Capacity;
+        public int Size => _full ? Capacity : (_tail - _head + Capacity) % Capacity;
 
         public virtual T Peek()
         {
@@ -61,22 +67,19 @@ namespace Petabridge.Collections
         {
             _full = _full || _tail + 1 == Capacity; // leave FULL flag on
             Buffer[_tail] = obj;
-            _tail = (_tail + 1)%Capacity;
+            _tail = (_tail + 1) % Capacity;
         }
 
         public void Enqueue(T[] objs)
         {
-            foreach (var item in objs)
-            {
-                Enqueue(item);
-            }
+            foreach (var item in objs) Enqueue(item);
         }
 
         public virtual T Dequeue()
         {
             _full = false; // full is always false as soon as we dequeue
             var item = Buffer[_head];
-            _head = (_head + 1)%Capacity;
+            _head = (_head + 1) % Capacity;
             return item;
         }
 
@@ -84,10 +87,7 @@ namespace Petabridge.Collections
         {
             var availabileItems = Math.Min(count, Size);
             var returnItems = new List<T>(availabileItems);
-            for (var i = 0; i < availabileItems; i++)
-            {
-                returnItems.Add(Dequeue());
-            }
+            for (var i = 0; i < availabileItems; i++) returnItems.Add(Dequeue());
 
             return returnItems;
         }
@@ -154,10 +154,8 @@ namespace Petabridge.Collections
                 count = Size;
 
             var bufferBegin = _head;
-            for (var i = 0; i < count; i++, bufferBegin = (bufferBegin + 1)%Capacity, index++)
-            {
+            for (var i = 0; i < count; i++, bufferBegin = (bufferBegin + 1) % Capacity, index++)
                 array[index] = Buffer[bufferBegin];
-            }
         }
 
         public IEnumerator<T> GetEnumerator()

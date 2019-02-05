@@ -1,4 +1,10 @@
-﻿using System;
+﻿// -----------------------------------------------------------------------
+// <copyright file="PriorityQueue.cs" company="Petabridge, LLC">
+//      Copyright (C) 2015 - 2019 Petabridge, LLC <https://petabridge.com>
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -12,7 +18,7 @@ namespace Petabridge.Collections
 
         public PriorityQueue(IComparer<T> comparer)
         {
-            this._comparer = comparer;
+            _comparer = comparer;
             _capacity = 11;
             _items = new T[_capacity];
         }
@@ -25,15 +31,12 @@ namespace Petabridge.Collections
         public int Count { get; private set; }
 
         /// <summary>
-        /// TODO: need to make this return the priority queue contents in the correct order
+        ///     TODO: need to make this return the priority queue contents in the correct order
         /// </summary>
         /// <returns></returns>
         public IEnumerator<T> GetEnumerator()
         {
-            for (var i = 0; i < Count; i++)
-            {
-                yield return _items[i];
-            }
+            for (var i = 0; i < Count; i++) yield return _items[i];
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -44,18 +47,12 @@ namespace Petabridge.Collections
         public T Dequeue()
         {
             var result = Peek();
-            if (result == null)
-            {
-                return default(T);
-            }
+            if (result == null) return default(T);
 
             var newCount = --Count;
             var lastItem = _items[newCount];
             _items[newCount] = default(T);
-            if (newCount > 0)
-            {
-                TrickleDown(0, lastItem);
-            }
+            if (newCount > 0) TrickleDown(0, lastItem);
 
             return result;
         }
@@ -68,10 +65,7 @@ namespace Petabridge.Collections
         public void Enqueue(T item)
         {
             var oldCount = Count;
-            if (oldCount == _capacity)
-            {
-                GrowHeap();
-            }
+            if (oldCount == _capacity) GrowHeap();
             Count = oldCount + 1;
             BubbleUp(oldCount, item);
         }
@@ -79,10 +73,7 @@ namespace Petabridge.Collections
         public void Remove(T item)
         {
             var index = Array.IndexOf(_items, item);
-            if (index == -1)
-            {
-                return;
-            }
+            if (index == -1) return;
 
             Count--;
             if (index == Count)
@@ -94,10 +85,7 @@ namespace Petabridge.Collections
                 var last = _items[Count];
                 _items[Count] = default(T);
                 TrickleDown(index, last);
-                if (Equals(_items[index], last))
-                {
-                    BubbleUp(index, last);
-                }
+                if (Equals(_items[index], last)) BubbleUp(index, last);
             }
         }
 
@@ -108,13 +96,11 @@ namespace Petabridge.Collections
             {
                 var parentIndex = (index - 1) >> 1;
                 var parentItem = _items[parentIndex];
-                if (_comparer.Compare(item, parentItem) >= 0)
-                {
-                    break;
-                }
+                if (_comparer.Compare(item, parentItem) >= 0) break;
                 _items[index] = parentItem;
                 index = parentIndex;
             }
+
             _items[index] = item;
         }
 
@@ -141,13 +127,12 @@ namespace Petabridge.Collections
                     childIndex = rightChildIndex;
                     childItem = _items[rightChildIndex];
                 }
-                if (_comparer.Compare(item, childItem) <= 0)
-                {
-                    break;
-                }
+
+                if (_comparer.Compare(item, childItem) <= 0) break;
                 _items[index] = childItem;
                 index = childIndex;
             }
+
             _items[index] = item;
         }
 

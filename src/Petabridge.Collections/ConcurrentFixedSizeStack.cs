@@ -1,4 +1,10 @@
-﻿namespace Petabridge.Collections
+﻿// -----------------------------------------------------------------------
+// <copyright file="ConcurrentFixedSizeStack.cs" company="Petabridge, LLC">
+//      Copyright (C) 2015 - 2019 Petabridge, LLC <https://petabridge.com>
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Petabridge.Collections
 {
     /// <summary>
     ///     Stack with a fixed size number of members - old items get pushed
@@ -99,21 +105,12 @@
             if (count > internalSize) //The maximum value of count is Size
                 count = internalSize;
 
-            for (var i = 0; i < count; i++, internalHead++, index++)
-            {
-                array[index] = internalCopy[internalHead];
-            }
+            for (var i = 0; i < count; i++, internalHead++, index++) array[index] = internalCopy[internalHead];
         }
 
-        public override object SyncRoot
-        {
-            get { return m_lockObject; }
-        }
+        public override object SyncRoot => m_lockObject;
 
-        public override bool IsSynchronized
-        {
-            get { return true; }
-        }
+        public override bool IsSynchronized => true;
 
         #endregion
     }

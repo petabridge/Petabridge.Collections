@@ -1,4 +1,10 @@
-﻿using System.Collections.Concurrent;
+﻿// -----------------------------------------------------------------------
+// <copyright file="ICircularBuffer.cs" company="Petabridge, LLC">
+//      Copyright (C) 2015 - 2019 Petabridge, LLC <https://petabridge.com>
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace Petabridge.Collections

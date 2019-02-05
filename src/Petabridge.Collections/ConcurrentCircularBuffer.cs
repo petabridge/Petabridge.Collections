@@ -1,4 +1,10 @@
-﻿using System;
+﻿// -----------------------------------------------------------------------
+// <copyright file="ConcurrentCircularBuffer.cs" company="Petabridge, LLC">
+//      Copyright (C) 2015 - 2019 Petabridge, LLC <https://petabridge.com>
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +17,15 @@ namespace Petabridge.Collections
     /// <typeparam name="T"></typeparam>
     public class ConcurrentCircularBuffer<T> : ICircularBuffer<T>
     {
+        #region Internal members
+
+        /// <summary>
+        ///     The buffer itself
+        /// </summary>
+        private readonly T[] _buffer;
+
+        #endregion
+
         private bool _full;
 
         public ConcurrentCircularBuffer(int capacity)
@@ -20,7 +35,7 @@ namespace Petabridge.Collections
             _buffer = new T[capacity];
         }
 
-        private int SizeUnsafe => _full ? Capacity : (Tail - Head + Capacity)%Capacity;
+        private int SizeUnsafe => _full ? Capacity : (Tail - Head + Capacity) % Capacity;
 
         /// <summary>
         ///     FOR TESTING PURPOSES ONLY
@@ -32,10 +47,7 @@ namespace Petabridge.Collections
         /// </summary>
         internal int Tail { get; private set; }
 
-        public bool IsReadOnly
-        {
-            get { return false; }
-        }
+        public bool IsReadOnly => false;
 
         public int Capacity => _buffer.Length;
 
@@ -72,10 +84,7 @@ namespace Petabridge.Collections
             //Expand
             lock (SyncRoot)
             {
-                foreach (var item in objs)
-                {
-                    UnsafeEnqueue(item);
-                }
+                foreach (var item in objs) UnsafeEnqueue(item);
             }
         }
 
@@ -99,10 +108,7 @@ namespace Petabridge.Collections
                 if (availabileItems == 0)
                     return returnItems;
 
-                for (var i = 0; i < availabileItems; i++)
-                {
-                    returnItems.Add(UnsafeDequeue());
-                }
+                for (var i = 0; i < availabileItems; i++) returnItems.Add(UnsafeDequeue());
             }
 
             return returnItems;
@@ -180,30 +186,24 @@ namespace Petabridge.Collections
             return GetEnumerator();
         }
 
-        public int Count
-        {
-            get { return Size; }
-        }
+        public int Count => Size;
 
         public object SyncRoot { get; } = new object();
 
-        public bool IsSynchronized
-        {
-            get { return true; }
-        }
+        public bool IsSynchronized => true;
 
         private void UnsafeEnqueue(T obj)
         {
             _full = _full || Tail + 1 == Capacity; // leave FULL flag on
             _buffer[Tail] = obj;
-            Tail = (Tail + 1)%Capacity;
+            Tail = (Tail + 1) % Capacity;
         }
 
         private T UnsafeDequeue()
         {
             _full = false; // full is always false as soon as we dequeue
             var item = _buffer[Head];
-            Head = (Head + 1)%Capacity;
+            Head = (Head + 1) % Capacity;
             return item;
         }
 
@@ -231,19 +231,8 @@ namespace Petabridge.Collections
                 count = SizeUnsafe;
 
             var bufferBegin = Head;
-            for (var i = 0; i < count; i++, bufferBegin = (bufferBegin + 1)%Capacity, index++)
-            {
+            for (var i = 0; i < count; i++, bufferBegin = (bufferBegin + 1) % Capacity, index++)
                 array[index] = _buffer[bufferBegin];
-            }
         }
-
-        #region Internal members
-
-        /// <summary>
-        ///     The buffer itself
-        /// </summary>
-        private readonly T[] _buffer;
-
-        #endregion
     }
 }

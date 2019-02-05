@@ -1,4 +1,10 @@
-﻿namespace Petabridge.Collections.Tests
+﻿// -----------------------------------------------------------------------
+// <copyright file="ConcurrentCircularBufferTests.cs" company="Petabridge, LLC">
+//      Copyright (C) 2015 - 2019 Petabridge, LLC <https://petabridge.com>
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Petabridge.Collections.Tests
 {
     public class ConcurrentCircularBufferTests : CircularBufferTests
     {

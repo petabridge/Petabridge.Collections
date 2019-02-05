@@ -1,6 +1,12 @@
 # Petabridge.Collections
 
-Update this readme file with your details.
+A set of specialized collections that should probably be in CoreFx.
+
+* `CircularBuffer<T>`
+* `ConcurrentCircularBuffer<T>`
+* `PriorityQueue<T>`
+* `ConcurrentPriorityQueue<T>`
+* `FixedSizeStack<T>`
 
 ## Building this solution
 To run the build script associated with this solution, execute the following:

@@ -1,4 +1,10 @@
-﻿using System;
+﻿// -----------------------------------------------------------------------
+// <copyright file="FixedSizeStack.cs" company="Petabridge, LLC">
+//      Copyright (C) 2015 - 2019 Petabridge, LLC <https://petabridge.com>
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -53,7 +59,7 @@ namespace Petabridge.Collections
             var item = default(T);
 
             if (Count > 0)
-                return _buffer[_head%Capacity];
+                return _buffer[_head % Capacity];
 
             return item;
         }
@@ -64,7 +70,7 @@ namespace Petabridge.Collections
 
             if (Count > 0)
             {
-                item = _buffer[_head%Capacity];
+                item = _buffer[_head % Capacity];
                 if (_head > 0) //Don't decrement the head if it's zero
                     _head--;
                 _size--;
@@ -78,7 +84,7 @@ namespace Petabridge.Collections
             if (Count > 0)
                 _head++;
 
-            _buffer[_head%Capacity] = item;
+            _buffer[_head % Capacity] = item;
 
             if (Count < Capacity)
                 _size++;
@@ -90,10 +96,7 @@ namespace Petabridge.Collections
             var availableItems = _size;
             var head = _head;
 
-            for (var i = 0; i < availableItems; i++, head--)
-            {
-                resultArray[i] = _buffer[head%Capacity];
-            }
+            for (var i = 0; i < availableItems; i++, head--) resultArray[i] = _buffer[head % Capacity];
 
             return resultArray;
         }
@@ -142,10 +145,7 @@ namespace Petabridge.Collections
             if (count > internalSize) //The maximum value of count is Size
                 count = internalSize;
 
-            for (var i = 0; i < count; i++, internalHead++, index++)
-            {
-                array[index] = internalCopy[internalHead];
-            }
+            for (var i = 0; i < count; i++, internalHead++, index++) array[index] = internalCopy[internalHead];
         }
 
         /// <summary>
@@ -172,17 +172,11 @@ namespace Petabridge.Collections
             CopyTo((T[]) array, index);
         }
 
-        public virtual int Count
-        {
-            get { return _size; }
-        }
+        public virtual int Count => _size;
 
         public virtual object SyncRoot { get; private set; }
 
-        public virtual bool IsSynchronized
-        {
-            get { return false; }
-        }
+        public virtual bool IsSynchronized => false;
 
         #endregion
     }

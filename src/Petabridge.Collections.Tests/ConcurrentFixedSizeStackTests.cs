@@ -1,46 +1,45 @@
-﻿using Xunit;
+﻿// -----------------------------------------------------------------------
+// <copyright file="ConcurrentFixedSizeStackTests.cs" company="Petabridge, LLC">
+//      Copyright (C) 2015 - 2019 Petabridge, LLC <https://petabridge.com>
+// </copyright>
+// -----------------------------------------------------------------------
+
+using Xunit;
 
 namespace Petabridge.Collections.Tests
 {
     public class ConcurrentFixedSizeStackTests
     {
-        #region Setup / Teardown
-
-        #endregion
-
-        #region Tests
-
         /// <summary>
-        ///     Should get a default value, rather than an exception, if we peek or pop when the stack is empty
+        ///     Should be able to fill a concurrent beyond capacity with no problems
         /// </summary>
         [Fact]
-        public void Should_get_default_value_on_Stack_Peek_or_Pop_when_Empty()
+        public void Should_add_items_to_Stack_is_over_Capacity()
         {
             //arrange
+            var items = new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
             var stack = new ConcurrentFixedSizeStack<int>(5);
 
             //act
+            Assert.Empty(stack);
+
+            foreach (var item in items)
+            {
+                stack.Push(item);
+                Assert.Equal(item, stack.Peek());
+            }
 
             //assert
-            Assert.Equal(default(int), stack.Pop());
-            Assert.Equal(default(int), stack.Peek());
-        }
+            Assert.Equal(stack.Capacity, stack.Count); //  "Stack should be full to capacity"
 
-        /// <summary>
-        ///     If we call Stack.Array() when the stack has no items, we should get a non-null array of size 0
-        /// </summary>
-        [Fact]
-        public void Should_get_array_with_no_items_on_ToArray_when_Empty()
-        {
-            //arrange
-            var stack = new ConcurrentFixedSizeStack<int>(5);
+            var length = items.Length - 1;
+            for (var i = 0; i < stack.Capacity; i++, length--)
+            {
+                var stackItem = stack.Pop();
+                Assert.Equal(items[length], stackItem);
+            }
 
-            //act
-            var array = stack.ToArray();
-
-            //assert
-            Assert.NotNull(array);
-            Assert.Empty(array);
+            Assert.True(length == items.Length / 2 - 1);
         }
 
         /// <summary>
@@ -109,37 +108,6 @@ namespace Petabridge.Collections.Tests
         }
 
         /// <summary>
-        ///     Should be able to fill a concurrent beyond capacity with no problems
-        /// </summary>
-        [Fact]
-        public void Should_add_items_to_Stack_is_over_Capacity()
-        {
-            //arrange
-            var items = new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-            var stack = new ConcurrentFixedSizeStack<int>(5);
-
-            //act
-            Assert.Empty(stack);
-
-            foreach (var item in items)
-            {
-                stack.Push(item);
-                Assert.Equal(item, stack.Peek());
-            }
-
-            //assert
-            Assert.Equal(stack.Capacity, stack.Count); //  "Stack should be full to capacity"
-
-            var length = items.Length - 1;
-            for (var i = 0; i < stack.Capacity; i++, length--)
-            {
-                var stackItem = stack.Pop();
-                Assert.Equal(items[length], stackItem);
-            }
-            Assert.True(length == items.Length/2 - 1);
-        }
-
-        /// <summary>
         ///     When a stack has been filled over capacity, we should get an array of the most recent items back
         /// </summary>
         [Fact]
@@ -170,9 +138,41 @@ namespace Petabridge.Collections.Tests
                 Assert.Equal(items[arrCount], i);
                 arrCount--;
             }
-            Assert.True(arrCount == items.Length/2 - 1);
+
+            Assert.True(arrCount == items.Length / 2 - 1);
         }
 
-        #endregion
+        /// <summary>
+        ///     If we call Stack.Array() when the stack has no items, we should get a non-null array of size 0
+        /// </summary>
+        [Fact]
+        public void Should_get_array_with_no_items_on_ToArray_when_Empty()
+        {
+            //arrange
+            var stack = new ConcurrentFixedSizeStack<int>(5);
+
+            //act
+            var array = stack.ToArray();
+
+            //assert
+            Assert.NotNull(array);
+            Assert.Empty(array);
+        }
+
+        /// <summary>
+        ///     Should get a default value, rather than an exception, if we peek or pop when the stack is empty
+        /// </summary>
+        [Fact]
+        public void Should_get_default_value_on_Stack_Peek_or_Pop_when_Empty()
+        {
+            //arrange
+            var stack = new ConcurrentFixedSizeStack<int>(5);
+
+            //act
+
+            //assert
+            Assert.Equal(default(int), stack.Pop());
+            Assert.Equal(default(int), stack.Peek());
+        }
     }
 }
