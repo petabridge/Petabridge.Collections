@@ -14,9 +14,9 @@ let product = "Petabridge.Collections"
 let configuration = "Release"
 
 // Metadata used when signing packages and DLLs
-let signingName = "My Library"
-let signingDescription = "My REALLY COOL Library"
-let signingUrl = "https://signing.is.cool/"
+let signingName = "Petabridge.Collections"
+let signingDescription = "A set of generic collections for C# and F#"
+let signingUrl = "https://github.com/petabridge/Petabridge.Collections"
 
 // Read release notes and version
 let solutionFile = FindFirstMatchingFile "*.sln" __SOURCE_DIRECTORY__  // dynamically look up the solution

@@ -2,8 +2,13 @@
   <PropertyGroup>
     <Copyright>Copyright © 2017 Your Company</Copyright>
     <Authors>Your Authors</Authors>
-    <VersionPrefix>0.1.0</VersionPrefix>
-    <PackageReleaseNotes>First release</PackageReleaseNotes>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <PackageReleaseNotes>A set of specialized collections that should probably be in CoreFx.
+`CircularBuffer&lt;T&gt;`
+`ConcurrentCircularBuffer&lt;T&gt;`
+`PriorityQueue&lt;T&gt;`
+`ConcurrentPriorityQueue&lt;T&gt;`
+`FixedSizeStack&lt;T&gt;`</PackageReleaseNotes>
     <PackageIconUrl>
     </PackageIconUrl>
     <PackageProjectUrl>
