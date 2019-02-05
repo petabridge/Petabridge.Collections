@@ -3,8 +3,8 @@
 
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>Your description here.</Description>
+    <TargetFramework>netstandard1.1</TargetFramework>
+    <Description>A set of specialized collections, such as circular buffers, priority queues, and more.</Description>
   </PropertyGroup>
 
 </Project>
