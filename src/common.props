@@ -1,0 +1,25 @@
+<Project>
+  <PropertyGroup>
+    <Copyright>Copyright © 2017 Your Company</Copyright>
+    <Authors>Your Authors</Authors>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <PackageReleaseNotes>A set of specialized collections that should probably be in CoreFx.
+`CircularBuffer&lt;T&gt;`
+`ConcurrentCircularBuffer&lt;T&gt;`
+`PriorityQueue&lt;T&gt;`
+`ConcurrentPriorityQueue&lt;T&gt;`
+`FixedSizeStack&lt;T&gt;`</PackageReleaseNotes>
+    <PackageIconUrl>
+    </PackageIconUrl>
+    <PackageProjectUrl>
+    </PackageProjectUrl>
+    <PackageLicenseUrl>
+    </PackageLicenseUrl>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NBenchVersion>1.2.2</NBenchVersion>
+    <XunitVersion>2.4.1</XunitVersion>
+    <TestSdkVersion>15.9.0</TestSdkVersion>
+  </PropertyGroup>
+</Project>

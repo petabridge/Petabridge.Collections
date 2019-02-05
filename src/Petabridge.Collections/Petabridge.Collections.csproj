@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\common.props" />
+
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.1</TargetFramework>
+    <Description>A set of specialized collections, such as circular buffers, priority queues, and more.</Description>
+  </PropertyGroup>
+
+</Project>
