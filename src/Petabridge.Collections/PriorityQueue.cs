@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Helios.Util.Collections
+namespace Petabridge.Collections
 {
     public class PriorityQueue<T> : IEnumerable<T>
     {

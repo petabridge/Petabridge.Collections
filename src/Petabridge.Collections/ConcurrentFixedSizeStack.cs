@@ -1,4 +1,4 @@
-﻿namespace Helios.Util.Collections
+﻿namespace Petabridge.Collections
 {
     /// <summary>
     ///     Stack with a fixed size number of members - old items get pushed

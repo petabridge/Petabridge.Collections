@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace Helios.Util.Collections
+namespace Petabridge.Collections
 {
     public interface IFixedSizeStack<T> : IEnumerable<T>, ICollection
     {

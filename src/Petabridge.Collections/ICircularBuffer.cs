@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 
-namespace Helios.Util.Collections
+namespace Petabridge.Collections
 {
     public interface ICircularBuffer<T> : IProducerConsumerCollection<T>
     {

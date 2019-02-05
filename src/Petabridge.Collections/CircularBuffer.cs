@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Helios.Util.Collections
+namespace Petabridge.Collections
 {
     /// <summary>
     ///     Base class for working with circular buffers
