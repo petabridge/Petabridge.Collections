@@ -8,6 +8,12 @@ A set of specialized collections that should probably be in CoreFx.
 * `ConcurrentPriorityQueue<T>`
 * `FixedSizeStack<T>`
 
+To install, simply use the [`Petabridge.Collections` NuGet package](https://www.nuget.org/packages/Petabridge.Collections/):
+
+```
+PS> Install-Package Petabridge.Collections -Version 1.0.0
+```
+
 ## Building this solution
 To run the build script associated with this solution, execute the following:
 
