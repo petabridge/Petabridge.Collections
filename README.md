@@ -11,7 +11,7 @@ A set of specialized collections that should probably be in CoreFx.
 To install, simply use the [`Petabridge.Collections` NuGet package](https://www.nuget.org/packages/Petabridge.Collections/):
 
 ```
-PS> Install-Package Petabridge.Collections -Version 1.0.0
+PS> Install-Package Petabridge.Collections
 ```
 
 ## Building this solution
