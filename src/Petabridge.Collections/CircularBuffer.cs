@@ -36,9 +36,27 @@ namespace Petabridge.Collections
 
         public CircularBuffer(int capacity)
         {
+            if (capacity > 0)
+            {
+                _head = 0;
+                _tail = 0;
+                Buffer = new T[capacity];
+            }
+            else
+            {
+                throw new Exception("Buffer size has to be greater than 0");
+            }
+        }
+
+        public CircularBuffer(IEnumerable<T> values, int capacity)
+        {
             _head = 0;
             _tail = 0;
             Buffer = new T[capacity];
+            foreach (var x in values)
+            {
+                Add(x);
+            }
         }
 
         /// <summary>
@@ -197,5 +215,6 @@ namespace Petabridge.Collections
         {
             return $"CircularBuffer<{GetType()}>(Capacity = {Capacity})";
         }
+
     }
 }

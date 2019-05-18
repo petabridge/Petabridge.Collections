@@ -4,6 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xunit;
@@ -35,6 +36,20 @@ namespace Petabridge.Collections.Tests
             var availableBytes = buffer.DequeueAll().ToArray();
             Assert.False(byteArrayOne.SequenceEqual(availableBytes));
             Assert.True(byteArrayTwo.SequenceEqual(availableBytes));
+        }
+        
+
+        [Fact]
+        public void ShouldBeAbleAcceptIEnumerableAsParameter()
+        {
+            var list = new List<int> {1, 2, 4};
+            var x = new CircularBuffer<int>(list, 4);
+            var t = x.Dequeue();
+            Assert.Equal(list[0],t);
+            t = x.Dequeue();
+            Assert.Equal(list[1], t);
+            t = x.Dequeue();
+            Assert.Equal(list[2], t);
         }
     }
 }
