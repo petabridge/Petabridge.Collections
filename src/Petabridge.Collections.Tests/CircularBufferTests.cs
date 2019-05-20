@@ -51,5 +51,18 @@ namespace Petabridge.Collections.Tests
             t = x.Dequeue();
             Assert.Equal(list[2], t);
         }
+
+        [Fact]
+        public void ShouldBeAbleToUseExtensionMethodToConvertToCircularBuffer()
+        {
+            var list = new List<int> { 1, 2, 4 };
+            var cBuff = list.ToCircularBuffer();
+            var t = cBuff.Dequeue();
+            Assert.Equal(list[0], t);
+            t = cBuff.Dequeue();
+            Assert.Equal(list[1], t);
+            t = cBuff.Dequeue();
+            Assert.Equal(list[2], t);
+        }
     }
 }
