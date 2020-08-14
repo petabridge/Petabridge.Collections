@@ -18,7 +18,7 @@
     <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
-    <NBenchVersion>1.2.2</NBenchVersion>
+    <NBenchVersion>2.0.1</NBenchVersion>
     <XunitVersion>2.4.1</XunitVersion>
     <TestSdkVersion>16.7.0</TestSdkVersion>
   </PropertyGroup>
