@@ -215,6 +215,5 @@ namespace Petabridge.Collections
         {
             return $"CircularBuffer<{GetType()}>(Capacity = {Capacity})";
         }
-
     }
 }
